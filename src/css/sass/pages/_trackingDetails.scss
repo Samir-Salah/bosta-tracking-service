@@ -27,11 +27,15 @@
             color: rgb(17, 27, 55);
             background: #fff;
             font : {
-              size: 22px;
+              size: 20px;
               family: "Cairo-Bold";
             }
             text-transform: uppercase;
             width: 25%;
+          }
+          .show-date{
+            text-transform: lowercase;
+
           }
         }
       }

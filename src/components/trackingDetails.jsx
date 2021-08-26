@@ -12,22 +12,43 @@ async function getTrack(trackingNumber) {
   }
 }
 class TrackingDetails extends Component {
+  daysOfWeek = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
   state = {
     trackingNo: "",
     currentStatus: {
       state: "",
-      timeStamp: "",
-      promisedDate: "",
+      timeStamp: [],
     },
+    promisedDate: [],
+    newDate: [],
+    theNameOfTheDay:""
   };
-  trackingNumber = "9442984";
+  trackingNumber = "7234258";
   componentDidMount = () => {
     getTrack(this.trackingNumber).then((response) => {
       this.setState({
         trackingNo: response.data.TrackingNumber,
         currentStatus: response.data.CurrentStatus,
-        promisedDate: response.data.PromisedDate,
+        promisedDate: response.data.PromisedDate.split("T"),
+        newDate: response.data.CurrentStatus.timestamp
+          .replace(/-/g, "/")
+          .split("T"),
+        // newDate : newDate.replace(/-/g , '/'),
       });
+      // this.state.newDate[0] = this.state.newDate[0].replace(/-/g , '/');
+      const day = new Date(this.state.newDate[0]);
+     this.setState({
+      theNameOfTheDay :this.daysOfWeek[day.getDay()] 
+    })
+    console.log(this.state.theNameOfTheDay)
     });
   };
   render() {
@@ -55,12 +76,12 @@ class TrackingDetails extends Component {
                   <li className="list-group-item border-0">
                     {this.state.currentStatus.state}
                   </li>
-                  <li className="list-group-item border-0">
-                    {this.state.currentStatus.timestamp}
+                  <li className="list-group-item border-0 show-date">
+                    {this.state.theNameOfTheDay +" "+ this.state.newDate[0]} at {this.state.newDate[1]}
                   </li>
                   <li className="list-group-item border-0">test</li>
                   <li className="list-group-item border-0">
-                    {this.state.promisedDate}
+                    {this.state.promisedDate[0]}
                   </li>
                 </ul>
               </li>
