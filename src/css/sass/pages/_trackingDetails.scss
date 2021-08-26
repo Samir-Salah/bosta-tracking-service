@@ -1,0 +1,99 @@
+@font-face {
+  font-family: "Cairo";
+  src: url("fonts/Cairo-SemiBold.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Cairo-Bold";
+  src: url("fonts/Cairo-Bold.ttf") format("truetype");
+}
+
+.container {
+  font-family: "Cairo", sans-serif;
+
+  .current-status {
+    .list-group {
+      .list-group-item {
+        .list-group.list-group-horizontal {
+          .list-group-item {
+            &.list-group-header {
+              color: rgb(163, 163, 163);
+              font : {
+                size: 16px;
+                family: "Cairo";
+              }
+              text-transform: unset;
+            }
+
+            color: rgb(17, 27, 55);
+            background: #fff;
+            font : {
+              size: 22px;
+              family: "Cairo-Bold";
+            }
+            text-transform: uppercase;
+            width: 25%;
+          }
+        }
+      }
+      .second-row {
+        .list-group {
+          .details {
+            .list-group-item {
+            }
+          }
+          .extra-details {
+            .list-group-item {
+              font : {
+                size: 14px;
+              }
+              margin: -5px;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .tracking-events {
+    .list-group {
+      .list-group-item {
+        color: #121c38;
+        font : {
+          size: 20px;
+        }
+        &.tracking-details-area {
+          width: 56%;
+        }
+        &.receiving-address-area {
+        }
+      }
+    }
+
+    .tracking-details-table {
+      width: 55%;
+      background: #fafafa;
+      .tracking-details-head {
+      }
+      ul {
+        .tracking-details-header {
+          width: 18%;
+          color: #99a4b9;
+          background: transparent;
+        }
+      }
+    }
+    .tracking-details-items {
+      width: 55%;
+      ul {
+        .tracking-details-item {
+          width: 18%;
+          background: transparent;
+          color: #585e72;
+        }
+      }
+    }
+
+    .tracking-address-table {
+    }
+  }
+}

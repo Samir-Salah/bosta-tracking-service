@@ -1,0 +1,168 @@
+.header-area{
+    @include position(fixed, 20px, none,none,none);
+    color: #fff;
+    z-index: 2;
+    a{
+        text-decoration: none;
+        color: #fff;
+    }
+
+    //menu area in mobile screen
+    .menu-bars{
+        @include position(relative, 8px , none, none , none);
+        color: #fff;
+        float: right;
+        margin-right: 35px;
+        z-index: 999;
+    }
+
+    .menu-active{
+        display: none;
+        background-color: #000;
+        z-index: 1;
+        @include s-mobile{
+            @include commonProberty(1000px , 100vh , #fff);
+            @include position(relative , -20px , -35px, none ,none);
+        }
+        @include mobile{
+            @include commonProberty(2000px , 100vh , #fff);
+            @include position(relative , -20px , -200px, none ,none);
+        }
+        ul{
+            text-align: center;
+            font-size: 1.5rem;
+            @include s-mobile{
+                padding-top: 170px;
+            }
+            @include mobile{
+                padding-top: 160px;
+            }
+            li{
+                .scrollactive-item{
+                    &:hover{
+                        color: $hover-color;
+                    }
+                }
+                @include s-mobile{
+                    padding-bottom: 40px;
+                    @include position(relative , none , 50px , none ,none);
+                }
+                @include mobile{
+                    padding-bottom: 40px;
+                    @include position(relative , none , 220px , none ,none);
+                }
+            }
+        }
+
+        &.appear{
+            display: block;
+            @include s-mobile{
+                @include prefixer(transition , right 0.3s ease-in-out , webkit moz o);
+                @include commonProberty(1000px , 100vh , #fff);
+            }
+        }
+        
+    }
+
+    //color of the logo 
+    .logo-side{
+        @include position(fixed, 5px, none,none,none);
+        @include s-mobile{
+            font-size: 1.8rem;
+            top: 20px;
+            z-index: -1;
+        }
+        @include mobile{
+            font-size: 1.8rem;
+            top: 20px;
+        }
+        font: {
+            size: 2.5rem;
+            weight: 600;
+        };
+
+        a{
+            text-decoration: none;
+            color: #fff;
+        }
+        //color of the letters "li" on portfolio
+        span{
+            color: $primary-color;
+        }
+    }
+    
+
+    //menu area in large screen
+    .menu-side{
+        font: {
+            size: 1.1rem;
+            weight: lighter;
+        }
+        
+        ul{
+            //the items of the menu list
+            li{
+                padding: 0 25px 0 25px;
+                span{    
+                    font-family: "Ubuntu", sans-serif;
+                    cursor: pointer;
+                    
+                    &::after {
+                        @include header-hover( block , 0 , 1px , $primary-color , width 0.3s);
+                        content: '';
+                    }
+                    &:hover{
+                        &::after {
+                            @include header-hover( block , 100% , 1px , $primary-color , width 0.3s);
+                            }                        
+                    }
+
+                    //hover of the current page
+                    &.active{
+                        &::after {
+                            @include header-hover( none , 0 , 1px , #fff ,width 0.3s);
+                        }
+                        &:hover{
+                            &::after {
+                                @include header-hover( none , 0 , 1px , #fff , width 0.3s);
+                                }                        
+                        }
+                    }
+                    
+                }
+            }
+        }
+    }
+    .active{
+        color: $primary-color;
+        &::after {
+            @include header-hover( block , 100% , 1px , $primary-color , width 0.3s);
+            content: '';
+            @include s-mobile{
+                @include header-hover( none , 100% , 1px , $primary-color , width 0.3s);
+                content: '';
+            }
+            @include mobile{
+                @include header-hover( none , 100% , 1px , $primary-color , width 0.3s);
+                content: '';
+
+            }
+            }
+        
+        /* &::before {
+            @include header-hover( block , 0 , 1.5px , $primary-color ,width 0.3s);
+            content: '';
+            }   */
+        &:hover{
+            &::after {
+                @include header-hover( block , 0 , 1px , $primary-color , width 0.3s);
+            } 
+            /* &::before {
+                @include header-hover( block , 100% , 1.5px , $primary-color , width 0.3s);
+                content: '';
+            }                   */      
+        }
+    }
+    
+}
+

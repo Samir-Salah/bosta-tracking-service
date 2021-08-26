@@ -1,0 +1,47 @@
+.home-footer-btn {
+    @include outlineBtn(none);
+    @include border(solid 1px $on-primary-color, 1px);
+    @include commonProberty(150px, 50px, $on-primary-color);
+    @include position(relative, -15px, none, none, none);
+    @include prefixer(transition, all 0.3s ease, webkit moz o);
+    @include s-mobile {
+        @include commonProberty(130px, 40px, $on-primary-color);
+        @include position(relative, -5px, none, none, none);
+        font-size: 1.2rem;
+        padding: 10px;
+    }
+    background-color: transparent;
+    font-size: 1.4rem;
+    padding: 12px;
+    &:hover {
+        box-shadow:         0 0 2px $on-primary-color,
+                            0 0 4px $on-primary-color,
+                            0 0 8px $on-primary-color;
+
+
+        -webkit-box-shadow: 0 0 2px $on-primary-color,
+                            0 0 4px $on-primary-color,
+                            0 0 8px $on-primary-color;            
+    }
+}
+
+.cv-btn {
+    @include outlineBtn(none);
+    @include border(solid 1px $primary-color, 10px);
+    @include commonProberty(230px, 70px, #fff);
+    @include prefixer(transition, all 0.5s ease, webkit moz o);
+    font-size: 1.6rem;
+    padding: 10px;
+    background-color: $primary-color;
+    &:hover {
+        background-color: #651fff;
+        box-shadow:         0 0 2px $primary-color,
+                            0 0 4px $primary-color,
+                            0 0 8px $primary-color;
+
+                            
+        -webkit-box-shadow: 0 0 2px $primary-color,
+                            0 0 4px $primary-color,
+                            0 0 8px $primary-color; 
+    }
+}
