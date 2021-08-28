@@ -24,22 +24,55 @@
               text-transform: unset;
             }
 
+            &.red {
+              color: red;
+            }
+
+            &.yellow {
+              color: #f9ba02;
+            }
+
+            &.green {
+              color: #36b600;
+            }
             color: rgb(17, 27, 55);
             background: #fff;
             font : {
-              size: 20px;
+              size: 16px;
               family: "Cairo-Bold";
             }
             text-transform: uppercase;
             width: 25%;
           }
-          .show-date{
+          .show-date {
             text-transform: lowercase;
-
           }
         }
       }
       .second-row {
+        .mt-4.mb-4 {
+          width: 95%;
+          margin: 2%;
+          .accomplished.green {
+            background-color: #36b600;
+          }
+          .accomplished.red {
+            background-color: #f40105;
+            
+            
+          }
+          .accomplished.yellow {
+            background-color: #f8b902;
+            &.big-icon{
+              width: 40px;
+              height: 40px;
+            }
+          }
+        }
+        ul {
+          .tracking-progress-bar {
+          }
+        }
         .list-group {
           .details {
             .list-group-item {
@@ -75,9 +108,7 @@
 
     .tracking-details-table {
       width: 55%;
-      background: #fafafa;
-      .tracking-details-head {
-      }
+
       ul {
         .tracking-details-header {
           width: 18%;
@@ -100,4 +131,22 @@
     .tracking-address-table {
     }
   }
+}
+
+.table {
+  width: 55%;
+  .thead {
+    .tr {
+      .th {
+        font-size: 30px;
+
+        background: red;
+      }
+    }
+  }
+}
+
+.big{
+  width: 40px;
+  height: 40px;
 }

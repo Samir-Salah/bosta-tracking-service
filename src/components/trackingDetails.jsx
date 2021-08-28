@@ -1,5 +1,8 @@
 import React, { Component } from "react";
 import axios from "axios";
+import "react-step-progress-bar/styles.css";
+import { ProgressBar, Step } from "react-step-progress-bar";
+import { Icon } from "rsuite";
 
 const apiUrl = "https://tracking.bosta.co/shipments/track/";
 async function getTrack(trackingNumber) {
@@ -11,6 +14,7 @@ async function getTrack(trackingNumber) {
     console.error(error);
   }
 }
+
 class TrackingDetails extends Component {
   daysOfWeek = [
     "Sunday",
@@ -22,16 +26,19 @@ class TrackingDetails extends Component {
     "Saturday",
   ];
   state = {
+    transitEvents: [],
     trackingNo: "",
     currentStatus: {
       state: "",
       timeStamp: [],
+      hub: "",
     },
     promisedDate: [],
     newDate: [],
-    theNameOfTheDay:""
+    theNameOfTheDay: "",
+    branch: "",
   };
-  trackingNumber = "7234258";
+  trackingNumber = "9442984"; //6636234, 7234258, 9442984,1094442 
   componentDidMount = () => {
     getTrack(this.trackingNumber).then((response) => {
       this.setState({
@@ -41,16 +48,95 @@ class TrackingDetails extends Component {
         newDate: response.data.CurrentStatus.timestamp
           .replace(/-/g, "/")
           .split("T"),
-        // newDate : newDate.replace(/-/g , '/'),
+        transitEvents: response.data.TransitEvents,
       });
-      // this.state.newDate[0] = this.state.newDate[0].replace(/-/g , '/');
       const day = new Date(this.state.newDate[0]);
-     this.setState({
-      theNameOfTheDay :this.daysOfWeek[day.getDay()] 
-    })
-    console.log(this.state.theNameOfTheDay)
+      this.setState({
+        theNameOfTheDay: this.daysOfWeek[day.getDay()],
+        branch: this.state.transitEvents[1].hub,
+      });
+      console.log(
+        this.state.transitEvents[this.state.transitEvents.length - 1].state
+      );
     });
   };
+
+  // function to check the state of shipement
+  checkState() {
+    if (this.state.currentStatus.state === "DELIVERED") {
+      return "list-group-item border-0 green";
+    } else if (this.state.currentStatus.state === "DELIVERED_TO_SENDER") {
+      return "list-group-item border-0 red";
+    } else {
+      return "list-group-item border-0 yellow";
+    }
+  }
+
+  //function to check the level of the progress bar
+  checkLevelOfProgressBar() {
+    if (this.state.currentStatus.state === "DELIVERED") {
+      return 100;
+    } else if (this.state.currentStatus.state === "PACKAGE_RECEIVED") {
+      return 34;
+    } else if (this.state.currentStatus.state === "TICKET_CREATED") {
+      return 0;
+    } else {
+      return 67;
+    }
+  }
+
+  //function to set state color for the current state
+  setColorOfProgressBar() {
+    if (this.state.currentStatus.state === "DELIVERED") {
+      return "accomplished green";
+    } else if (this.state.currentStatus.state === "DELIVERED_TO_SENDER") {
+      return "accomplished red";
+    } else {
+      return "accomplished yellow";
+    }
+  }
+
+  //function to fill the background of the progress bar
+  filledBackground() {
+    if (this.state.currentStatus.state === "DELIVERED") {
+      return "#36B600";
+    } else if (this.state.currentStatus.state === "DELIVERED_TO_SENDER") {
+      return "#F40105";
+    } else {
+      return "#F8B902";
+    }
+  }
+
+  //function to make icon big
+  setIconBig() {
+    if (this.state.currentStatus.state === "DELIVERED_TO_SENDER") {
+      return "big";
+    } else {
+      return "big";
+    }
+  }
+
+  //function to change the icon in progress bar
+  changeIcon(){
+    if (this.state.currentStatus.state === "DELIVERED") {
+      return ( <Icon icon="check"></Icon>);
+    } 
+    
+    else {
+      return (<Icon icon="save" size="2x"></Icon>);
+    }
+  }
+
+  changeIconForUndelivered(){
+    if(this.state.currentStatus.state === "DELIVERED_TO_SENDER"){
+      return (<Icon icon="truck" size="2x"></Icon>);
+    }
+    else if (this.state.currentStatus.state === "DELIVERED") {
+      return ( <Icon icon="check"></Icon>);
+    } 
+  }
+
+
   render() {
     return (
       <React.Fragment>
@@ -73,11 +159,12 @@ class TrackingDetails extends Component {
                   </li>
                 </ul>
                 <ul className="list-group list-group-horizontal">
-                  <li className="list-group-item border-0">
+                  <li className={this.checkState()}>
                     {this.state.currentStatus.state}
                   </li>
                   <li className="list-group-item border-0 show-date">
-                    {this.state.theNameOfTheDay +" "+ this.state.newDate[0]} at {this.state.newDate[1]}
+                    {this.state.theNameOfTheDay + " " + this.state.newDate[0]}{" "}
+                    at {this.state.newDate[1]}
                   </li>
                   <li className="list-group-item border-0">test</li>
                   <li className="list-group-item border-0">
@@ -87,46 +174,62 @@ class TrackingDetails extends Component {
               </li>
 
               <li className="list-group-item second-row">
-                <ul className="list-group list-group-horizontal">
-                  <li className="list-group-item border-0 list-group-header">
-                    test second
-                  </li>
-                  <li className="list-group-item border-0 list-group-header">
-                    test
-                  </li>
-                  <li className="list-group-item border-0 list-group-header">
-                    test
-                  </li>
-                  <li className="list-group-item border-0 list-group-header">
-                    test
-                  </li>
-                </ul>
-                <ul className="list-group list-group-horizontal details">
-                  <li className="list-group-item border-0">
-                    test
-                    <ul className="list-group list-group-horizontal extra-details">
-                      <li className="list-group-item border-0">test</li>
-                    </ul>
-                  </li>
-                  <li className="list-group-item border-0">
-                    test
-                    <ul className="list-group list-group-horizontal extra-details">
-                      <li className="list-group-item border-0">test</li>
-                    </ul>
-                  </li>
-                  <li className="list-group-item border-0">
-                    test
-                    <ul className="list-group list-group-horizontal extra-details">
-                      <li className="list-group-item border-0">test</li>
-                    </ul>
-                  </li>
-                  <li className="list-group-item border-0">
-                    test
-                    <ul className="list-group list-group-horizontal extra-details">
-                      <li className="list-group-item border-0">test</li>
-                    </ul>
-                  </li>
-                </ul>
+                <div className="mt-4 mb-4">
+                  <ProgressBar
+                    percent={this.checkLevelOfProgressBar()}
+                    filledBackground={this.filledBackground()}
+                  >
+                    <Step>
+                      {({ accomplished }) => (
+                        <div
+                          className={`indexedStep ${
+                            accomplished ? this.setColorOfProgressBar() : null
+                          }`}
+                        >
+                          <Icon icon="check"></Icon>
+                        </div>
+                      )}
+                    </Step>
+
+                    <Step>
+                      {({ accomplished }) => (
+                        <div
+                          className={`indexedStep ${
+                            accomplished ? this.setColorOfProgressBar() : null
+                          }`}
+                        >
+                          <Icon icon="check"></Icon>
+                        </div>
+                      )}
+                    </Step>
+                    <Step>
+                      {({ accomplished }) => (
+                        <div
+                          className={`indexedStep ${
+                            accomplished
+                              ? this.setColorOfProgressBar()
+                              : null 
+                          } ${ this.state.currentStatus.state ==="DELIVERED" ? null : this.setIconBig()}`}
+                        >
+                          {/* <Icon icon="truck" size="2x"></Icon> */}
+                          {this.changeIconForUndelivered()}
+                        </div>
+                      )}
+                    </Step>
+                    <Step>
+                      {({ accomplished }) => (
+                        <div
+                          className={`indexedStep ${
+                            accomplished ? this.setColorOfProgressBar() : null
+                          } ${ this.state.currentStatus.state ==="DELIVERED" ? null : this.setIconBig()}`}
+                        >
+
+                          {this.changeIcon()}
+                        </div>
+                      )}
+                    </Step>
+                  </ProgressBar>
+                </div>
               </li>
             </ul>
           </div>
@@ -140,9 +243,27 @@ class TrackingDetails extends Component {
                 Receiving Address
               </li>
             </ul>
-            <ul className="list-group">
-              <li className="list-group-item tracking-details-table">
+            <table class="table border-ligth table-bordered rounded-3">
+              <thead className="table-light">
+                <tr>
+                  <th scope="col">Branch</th>
+                  <th scope="col">Date</th>
+                  <th scope="col">Time</th>
+                  <th scope="col">Details</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Mark</td>
+                  <td>Otto</td>
+                  <td>@mdo</td>
+                  <td>@mdo</td>
+                </tr>
+              </tbody>
+            </table>
+            {/* <ul className="list-group">
                 <ul className="list-group list-group-horizontal tracking-details-head">
+                <li className="list-group-item tracking-details-table">
                   <li className="list-group-item border-0 tracking-details-header">
                     Branch
                   </li>
@@ -159,21 +280,38 @@ class TrackingDetails extends Component {
               </li>
               <li className="list-group-item tracking-details-items">
                 <ul className="list-group list-group-horizontal">
-                  <li className="list-group-item border-0 tracking-details-item">
+                  <li className="list-group-item border-0 tracking-details-header">
                     Branch
                   </li>
-                  <li className="list-group-item border-0 tracking-details-item">
+                  <li className="list-group-item border-0 tracking-details-header">
                     Date
                   </li>
-                  <li className="list-group-item border-0 tracking-details-item">
+                  <li className="list-group-item border-0 tracking-details-header">
                     Time
                   </li>
-                  <li className="list-group-item border-0 tracking-details-item">
+                  <li className="list-group-item border-0 tracking-details-header">
                     Details
                   </li>
                 </ul>
               </li>
-            </ul>
+              <li className="list-group-item tracking-details-items">
+                <ul className="list-group list-group-horizontal">
+                  <li className="list-group-item border-0 tracking-details-header">
+                    Branch
+                  </li>
+                  <li className="list-group-item border-0 tracking-details-header">
+                    Date
+                  </li>
+                  <li className="list-group-item border-0 tracking-details-header">
+                    Time
+                  </li>
+                  <li className="list-group-item border-0 tracking-details-header">
+                    Details
+                  </li>
+                </ul>
+              </li>
+            </ul> */}
+
             {/* <ul>
               <li className="list-group-item tracking-address-table">
                 <ul className="list-group list-group-horizontal">

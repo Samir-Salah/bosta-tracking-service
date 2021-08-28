@@ -6,6 +6,7 @@ import TrackingDetails from "./components/trackingDetails";
 
 //importing css files
 import "bootstrap/dist/css/bootstrap.min.css";
+import 'rsuite/dist/styles/rsuite-default.css';
 import "./css/main.css";
 
 ReactDOM.render(
