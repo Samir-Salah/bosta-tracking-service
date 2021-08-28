@@ -8,7 +8,6 @@ const apiUrl = "https://tracking.bosta.co/shipments/track/";
 async function getTrack(trackingNumber) {
   try {
     const response = await axios.get(`${apiUrl + trackingNumber}`);
-    console.log(response);
     return response;
   } catch (error) {
     console.error(error);
@@ -38,7 +37,7 @@ class TrackingDetails extends Component {
     theNameOfTheDay: "",
     branch: "",
   };
-  trackingNumber = "9442984"; //6636234, 7234258, 9442984,1094442 
+  trackingNumber = "9442984"; //6636234, 7234258, 9442984,1094442
   componentDidMount = () => {
     getTrack(this.trackingNumber).then((response) => {
       this.setState({
@@ -55,9 +54,6 @@ class TrackingDetails extends Component {
         theNameOfTheDay: this.daysOfWeek[day.getDay()],
         branch: this.state.transitEvents[1].hub,
       });
-      console.log(
-        this.state.transitEvents[this.state.transitEvents.length - 1].state
-      );
     });
   };
 
@@ -117,25 +113,66 @@ class TrackingDetails extends Component {
   }
 
   //function to change the icon in progress bar
-  changeIcon(){
+  changeIcon() {
     if (this.state.currentStatus.state === "DELIVERED") {
-      return ( <Icon icon="check"></Icon>);
-    } 
+      return <Icon icon="check"></Icon>;
+    } else {
+      return <Icon icon="save" size="2x"></Icon>;
+    }
+  }
+
+  changeIconForUndelivered() {
+    if (this.state.currentStatus.state === "DELIVERED_TO_SENDER") {
+      return <Icon icon="truck" size="2x"></Icon>;
+    } else if (this.state.currentStatus.state === "DELIVERED") {
+      return <Icon icon="check"></Icon>;
+    }
+  }
+
+  //get the current state
+  getCurrentState() {
+    switch (this.state.currentStatus.state) {
+      case "DELIVERED":
+        return null;
+        
+
+      case "TICKET_CREATED":
+        return null;
+        
+
+      case "PACKAGE_RECEIVED":
+        return null;
+        
     
-    else {
-      return (<Icon icon="save" size="2x"></Icon>);
+        
+
+      default:
+        return this.state.currentStatus.state;
+        
     }
   }
 
-  changeIconForUndelivered(){
-    if(this.state.currentStatus.state === "DELIVERED_TO_SENDER"){
-      return (<Icon icon="truck" size="2x"></Icon>);
-    }
-    else if (this.state.currentStatus.state === "DELIVERED") {
-      return ( <Icon icon="check"></Icon>);
-    } 
-  }
+  //set class according to current state
+  setClassToCurrentState() {
+    switch (this.state.currentStatus.state) {
+      case "DELIVERED":
+        return null;
+        
 
+      case "TICKET_CREATED":
+        return null;
+        
+
+      case "PACKAGE_RECEIVED":
+        return null;
+        
+        
+
+      default:
+        return "red";
+        
+    }
+  }
 
   render() {
     return (
@@ -143,7 +180,7 @@ class TrackingDetails extends Component {
         <div className="container mt-5">
           <div className="current-status">
             <ul className="list-group">
-              <li className="list-group-item">
+              <li className="list-group-item first-row">
                 <ul className="list-group list-group-horizontal">
                   <li className="list-group-item border-0 list-group-header">
                     Tracking Number {this.state.trackingNo}
@@ -174,7 +211,8 @@ class TrackingDetails extends Component {
               </li>
 
               <li className="list-group-item second-row">
-                <div className="mt-4 mb-4">
+                {/* progress bar (steps) of the tracking  */}
+                <div className="mt-4 mb-4 steps-bar">
                   <ProgressBar
                     percent={this.checkLevelOfProgressBar()}
                     filledBackground={this.filledBackground()}
@@ -206,10 +244,12 @@ class TrackingDetails extends Component {
                       {({ accomplished }) => (
                         <div
                           className={`indexedStep ${
-                            accomplished
-                              ? this.setColorOfProgressBar()
-                              : null 
-                          } ${ this.state.currentStatus.state ==="DELIVERED" ? null : this.setIconBig()}`}
+                            accomplished ? this.setColorOfProgressBar() : null
+                          } ${
+                            this.state.currentStatus.state === "DELIVERED"
+                              ? null
+                              : this.setIconBig()
+                          }`}
                         >
                           {/* <Icon icon="truck" size="2x"></Icon> */}
                           {this.changeIconForUndelivered()}
@@ -221,15 +261,36 @@ class TrackingDetails extends Component {
                         <div
                           className={`indexedStep ${
                             accomplished ? this.setColorOfProgressBar() : null
-                          } ${ this.state.currentStatus.state ==="DELIVERED" ? null : this.setIconBig()}`}
+                          } ${
+                            this.state.currentStatus.state === "DELIVERED"
+                              ? null
+                              : this.setIconBig()
+                          }`}
                         >
-
                           {this.changeIcon()}
                         </div>
                       )}
                     </Step>
                   </ProgressBar>
                 </div>
+
+                <ul className="list-group list-group-horizontal steps-details">
+                  <li className="list-group-item border-0 first-step">
+                    Shipment created
+                  </li>
+                  <li className="list-group-item border-0 ms-5 second-step">
+                    The shipment has been <br />
+                    received from the merchant
+                  </li>
+                  <li className="list-group-item border-0 ms-5 third-step">
+                    The shipment is out for delivery
+                    <br />
+                    <span className={this.setClassToCurrentState()}>{this.getCurrentState()}</span>
+                  </li>
+                  <li className="list-group-item border-0 ms-5 fourth-step">
+                    Shipment delivered
+                  </li>
+                </ul>
               </li>
             </ul>
           </div>

@@ -12,7 +12,7 @@
 
   .current-status {
     .list-group {
-      .list-group-item {
+      .first-row {
         .list-group.list-group-horizontal {
           .list-group-item {
             &.list-group-header {
@@ -36,7 +36,7 @@
               color: #36b600;
             }
             color: rgb(17, 27, 55);
-            background: #fff;
+            background: transparent;
             font : {
               size: 16px;
               family: "Cairo-Bold";
@@ -49,8 +49,34 @@
           }
         }
       }
+
       .second-row {
-        .mt-4.mb-4 {
+        .steps-details {
+          -webkit-columns: 2;
+          -moz-columns: 2;
+          columns: 2;
+          li {
+            color: rgb(17, 27, 55);
+            width: 125%;
+            margin-top: -10px;
+            background: transparent;
+            font : {
+              size: 16px;
+              family: "Cairo-Bold";
+            }
+          }
+          .first-step {
+          }
+          .second-step {
+          }
+          .third-step {
+            
+          }
+          .fourth-step {
+            
+          }
+        }
+        .steps-bar {
           width: 95%;
           margin: 2%;
           .accomplished.green {
@@ -58,12 +84,10 @@
           }
           .accomplished.red {
             background-color: #f40105;
-            
-            
           }
           .accomplished.yellow {
             background-color: #f8b902;
-            &.big-icon{
+            &.big-icon {
               width: 40px;
               height: 40px;
             }
@@ -146,7 +170,7 @@
   }
 }
 
-.big{
+.big {
   width: 40px;
   height: 40px;
 }
