@@ -15,6 +15,7 @@ export default{
   The_shipment_has_been_received_from_the_merchant:
 "The shipment has been received from the merchant",
   The_shipment_is_out_for_delivery: "The shipment is out for delivery",
+  RECEIVED_DELIVERY_LOCATION:"RECEIVED DELIVERY LOCATION",
   Shipment_delivered: "Shipment delivered",
   Tracking_Details: "Tracking Details",
   Branch: "Branch",

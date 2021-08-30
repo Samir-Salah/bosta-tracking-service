@@ -15,6 +15,7 @@ export default {
   The_shipment_has_been_received_from_the_merchant:
     "تم استلام الشحنة من التاجر",
   The_shipment_is_out_for_delivery: "الشحنة خرجت للتسليم",
+  RECEIVED_DELIVERY_LOCATION :"تم استلام موقع التسليم",
   Shipment_delivered: "تم التسليم",
   Tracking_Details: "تفاصيل الشحنة",
   Branch: "الفرع",
