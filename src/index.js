@@ -34,14 +34,10 @@ i18n
   
   });
 
-const loadingMarkup = (
-  <div className="py-4 text-center">
-    <h2>Loading...</h2>
-  </div>
-);
+
 
 ReactDOM.render(
-  <Suspense fallback={loadingMarkup}>
+  <Suspense fallback={(<div>Loading...</div>)}>
     <React.StrictMode>
       <TrackingDetails />
     </React.StrictMode>

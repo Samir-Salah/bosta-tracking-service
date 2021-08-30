@@ -52,123 +52,63 @@
 
       .second-row {
         .steps-details {
-          -webkit-columns: 2;
-          -moz-columns: 2;
-          columns: 2;
+          width: 100%;
           li {
             color: $primary-color;
-            width: 125%;
             margin-top: -10px;
             background: transparent;
             font : {
               size: 14px;
               family: "Cairo-Bold";
             }
-          }
-          .first-step {
-            width: 20%;
-          }
-          .second-step {
-            width: 26%;
-            padding-left: 5%;
-          }
-          .third-step {
-            width: 40%;
-            padding-left: 8%;
-          }
-          .fourth-step {
-            width: 17%;
-            .colored {
-              color: $primary-color;
+            &.first-step {
+              width: 20%;
             }
-            .not-colored {
-              color: #d3d3d3;
+            &.second-step {
+              width: 30%;
+              padding-left: 3%;
             }
-          }
-        }
-        .steps-bar {
-          width: 95%;
-          margin: 2%;
-          .accomplished.green {
-            background-color: $green-color;
-          }
-          .accomplished.red {
-            background-color: $red-color
-          }
-          .accomplished.yellow {
-            background-color: $yellow-color;
-          }
-          &.big-icon {
-            width: 40px;
-            height: 40px;
-          }
-        }
-        ul {
-          .tracking-progress-bar {
-          }
-        }
-        .list-group {
-          .details {
-            .list-group-item {
+            &.third-step {
+              width: 35%;
+              padding-left: 5%;
             }
-          }
-          .extra-details {
-            .list-group-item {
-              font : {
-                size: 14px;
+            &.fourth-step {
+              width: 15%;
+              .colored {
+                color: $primary-color;
               }
-              margin: -5px;
+              .not-colored {
+                color: #d3d3d3;
+              }
+            }
+          }
+        }
+        .second-row-items {
+          width: 100%;
+          .steps-bar {
+            width: 95%;
+            margin: 2%;
+            .accomplished.green {
+              background-color: $green-color;
+            }
+            .accomplished.red {
+              background-color: $red-color;
+            }
+            .accomplished.yellow {
+              background-color: $yellow-color;
+            }
+            &.big-icon {
+              width: 40px;
+              height: 40px;
             }
           }
         }
       }
-    }
-  }
-
-  .tracking-events {
-    .list-group {
-      .list-group-item {
-        color: $primary-color;
-        font : {
-          size: 20px;
-        }
-        &.tracking-details-area {
-          width: 56%;
-        }
-        &.receiving-address-area {
-        }
-      }
-    }
-
-    .tracking-details-table {
-      width: 55%;
-
-      ul {
-        .tracking-details-header {
-          width: 18%;
-          color: $secondry-color;
-          background: transparent;
-        }
-      }
-    }
-    .tracking-details-items {
-      width: 55%;
-      ul {
-        .tracking-details-item {
-          width: 18%;
-          background: transparent;
-          color: $secondry-color;
-        }
-      }
-    }
-
-    .tracking-address-table {
     }
   }
 
   //Shipment Details area
   .Shipment_Details {
-    
     margin-top: 25px;
 
     .details_head {
@@ -188,8 +128,8 @@
       table {
         width: 65%;
         margin: 0 0 15px 0;
-        @include border(1px solid #EEEEEE , none);
-        @include prefixer( border-radius , 20px, webkit moz o);
+        @include border(1px solid #eeeeee, none);
+        @include prefixer(border-radius, 20px, webkit moz o);
         font-size: 14px;
         text-align: left;
         border-spacing: 0;
@@ -198,31 +138,24 @@
           display: table-row-group;
           vertical-align: middle;
           border-color: inherit;
-          
+
           .table-row {
-            @include border(1px solid #EEEEEE , none);
+            @include border(1px solid #eeeeee, none);
             display: table-row;
             vertical-align: inherit;
             height: 50px;
-            color:  $secondry-color;
-            
-            
+            color: $secondry-color;
+
             &.table-header-first {
               background-color: #fafafa;
             }
             .th-content {
-            
               padding-left: 4%;
-              color: #9BA5BB;
-              
-          
-            }  
+              color: #9ba5bb;
+            }
             .td-content {
-            
-                padding-left: 4%;
-                color:  $table-items-color;
-
-              
+              padding-left: 4%;
+              color: $table-items-color;
             }
           }
         }
@@ -230,4 +163,489 @@
     }
   }
 }
+
+/************************* make it responsive area *********************************
+
+start mobile-s devices with max-width: 480px
+*/
+@include mobile-s {
+  .container {
+    .current-status {
+      // position: relative;
+      .list-group {
+        margin-left: 5px;
+        width: 97%;
+        .first-row {
+          // @include position(absolute , 50px , none , none,none);
+          .list-group.list-group-horizontal {
+            width: 100%;
+            .list-group-item {
+              &.list-group-header {
+                font : {
+                  size: 12px;
+                }
+              }
+
+              font : {
+                size: 12px;
+              }
+            }
+          }
+        }
+        .second-row {
+          height: 80px;
+          .steps-details {
+            width: 100%;
+            li {
+              margin-left: -20px;
+              visibility: hidden;
+              font : {
+                size: 10px;
+              }
+              &.first-step {
+                width: 10%;
+              }
+              &.second-step {
+                width: 30%;
+                padding-left: 3%;
+              }
+              &.third-step {
+                width: 35%;
+                padding-left: 5%;
+              }
+              &.fourth-step {
+                width: 15%;
+              }
+            }
+          }
+          .second-row-items {
+            width: 100%;
+            .steps-bar {
+              width: 90%;
+              margin: 2%;
+            }
+          }
+        }
+      }
+    }
+
+    //Shipment Details area
+    .Shipment_Details {
+      // @include position(absolute , 800px , none , none,none);
+
+      margin-top: 45px;
+
+      .details_head {
+        .head_left {
+          font-size: 16px;
+        }
+      }
+      .details_head_table {
+        margin-top: 10px;
+        table {
+          width: 100%;
+          margin: 0 0 15px 0;
+          font-size: 8px;
+          tbody {
+            .table-row {
+              .th-content {
+                padding-left: 3%;
+              }
+              .td-content {
+                padding-left: 3%;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+//start mobile devices with (min-width: 481px) and (max-width: 767px)
+
+@include mobile {
+  .container {
+    .current-status {
+      // position: relative;
+      .list-group {
+        margin-left: 5px;
+        width: 97%;
+        .first-row {
+          // @include position(absolute , 50px , none , none,none);
+          .list-group.list-group-horizontal {
+            width: 100%;
+            .list-group-item {
+              &.list-group-header {
+                font : {
+                  size: 12px;
+                }
+              }
+
+              font : {
+                size: 12px;
+              }
+            }
+          }
+        }
+        .second-row {
+          .steps-details {
+            width: 100%;
+            li {
+              margin-left: -20px;
+              font : {
+                size: 10px;
+              }
+              &.first-step {
+                width: 2%;
+              }
+              &.second-step {
+                width: 48%;
+                padding-left: 15%;
+              }
+              &.third-step {
+                width: 48%;
+                padding-left: 3%;
+              }
+              &.fourth-step {
+                width: 2%;
+                padding-right: 12%;
+              }
+            }
+          }
+          .second-row-items {
+            width: 100%;
+            .steps-bar {
+              width: 90%;
+              margin: 2%;
+            }
+          }
+        }
+      }
+    }
+
+    //Shipment Details area
+    .Shipment_Details {
+      // @include position(absolute , 800px , none , none,none);
+
+      margin-top: 45px;
+
+      .details_head {
+        .head_left {
+          font-size: 18px;
+        }
+      }
+      .details_head_table {
+        margin-top: 10px;
+        table {
+          width: 100%;
+          margin: 0 0 15px 0;
+          font-size: 12px;
+          tbody {
+            .table-row {
+              .th-content {
+                padding-left: 3%;
+              }
+              .td-content {
+                padding-left: 3%;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+//start tablet devices with (min-width: 768px) and (max-width: 991px)
+
+
+@include tablet {
+  .container {
+    .current-status {
+      // position: relative;
+      .list-group {
+        margin-left: 5px;
+        width: 97%;
+        .first-row {
+          // @include position(absolute , 50px , none , none,none);
+          .list-group.list-group-horizontal {
+            width: 100%;
+            .list-group-item {
+              &.list-group-header {
+                font : {
+                  size: 12px;
+                }
+              }
+
+              font : {
+                size: 12px;
+              }
+            }
+          }
+        }
+        .second-row {
+          .steps-details {
+            width: 100%;
+            li {
+              margin-left: -20px;
+              font : {
+                size: 10px;
+              }
+              &.first-step {
+                width: 2%;
+              }
+              &.second-step {
+                width: 48%;
+                padding-left: 15%;
+              }
+              &.third-step {
+                width: 48%;
+                padding-left: 3%;
+              }
+              &.fourth-step {
+                width: 2%;
+                padding-right: 12%;
+              }
+            }
+          }
+          .second-row-items {
+            width: 100%;
+            .steps-bar {
+              width: 90%;
+              margin: 2%;
+            }
+          }
+        }
+      }
+    }
+
+    //Shipment Details area
+    .Shipment_Details {
+      // @include position(absolute , 800px , none , none,none);
+
+      margin-top: 45px;
+
+      .details_head {
+        .head_left {
+          font-size: 18px;
+        }
+      }
+      .details_head_table {
+        margin-top: 10px;
+        table {
+          width: 100%;
+          margin: 0 0 15px 0;
+          font-size: 12px;
+          tbody {
+            .table-row {
+              .th-content {
+                padding-left: 3%;
+              }
+              .td-content {
+                padding-left: 3%;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+
+
+//start laptop devices with (min-width: 992px) and (max-width: 1199px)
+
+
+@include laptop {
+  .container {
+    .current-status {
+      // position: relative;
+      .list-group {
+        margin-left: 5px;
+        width: 97%;
+        .first-row {
+          // @include position(absolute , 50px , none , none,none);
+          .list-group.list-group-horizontal {
+            width: 100%;
+            .list-group-item {
+              &.list-group-header {
+                font : {
+                  size: 12px;
+                }
+              }
+
+              font : {
+                size: 12px;
+              }
+            }
+          }
+        }
+        .second-row {
+          .steps-details {
+            width: 100%;
+            li {
+              margin-left: -20px;
+              font : {
+                size: 14px;
+              }
+              &.first-step {
+                width: 31%;
+              }
+              &.second-step {
+                width: 48%;
+                padding-left: 5%;
+              }
+              &.third-step {
+                width: 48%;
+                padding-left: 0%;
+              }
+              &.fourth-step {
+                width: 35%;
+                padding-right: 0%;
+              }
+            }
+          }
+          .second-row-items {
+            width: 100%;
+            .steps-bar {
+              width: 93%;
+              margin: 2%;
+            }
+          }
+        }
+      }
+    }
+
+    //Shipment Details area
+    .Shipment_Details {
+      // @include position(absolute , 800px , none , none,none);
+
+      margin-top: 45px;
+
+      .details_head {
+        .head_left {
+          font-size: 18px;
+        }
+      }
+      .details_head_table {
+        margin-top: 10px;
+        table {
+          width: 65%;
+          margin: 0 0 15px 0;
+          font-size: 14px;
+          tbody {
+            .table-row {
+              .th-content {
+                padding-left: 3%;
+              }
+              .td-content {
+                padding-left: 3%;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+
+//start windows devices with (min-width: 1200px)
+
+
+@include windows {
+  .container {
+    .current-status {
+      // position: relative;
+      .list-group {
+        margin-left: 5px;
+        width: 97%;
+        .first-row {
+          // @include position(absolute , 50px , none , none,none);
+          .list-group.list-group-horizontal {
+            width: 100%;
+            .list-group-item {
+              &.list-group-header {
+                font : {
+                  size: 16px;
+                }
+              }
+
+              font : {
+                size: 16px;
+              }
+            }
+          }
+        }
+        .second-row {
+          .steps-details {
+            width: 100%;
+            li {
+              margin-left: -20px;
+              font : {
+                size: 16px;
+              }
+              &.first-step {
+                width: 31%;
+              }
+              &.second-step {
+                width: 48%;
+                padding-left: 5%;
+              }
+              &.third-step {
+                width: 48%;
+                padding-left: 4%;
+              }
+              &.fourth-step {
+                width: 29%;
+                padding-right: 0%;
+              }
+            }
+          }
+          .second-row-items {
+            width: 100%;
+            .steps-bar {
+              width: 93%;
+              margin: 2%;
+            }
+          }
+        }
+      }
+    }
+
+    //Shipment Details area
+    .Shipment_Details {
+      // @include position(absolute , 800px , none , none,none);
+
+      margin-top: 45px;
+
+      .details_head {
+        .head_left {
+          font-size: 18px;
+        }
+      }
+      .details_head_table {
+        margin-top: 10px;
+        table {
+          width: 65%;
+          margin: 0 0 15px 0;
+          font-size: 16px;
+          tbody {
+            .table-row {
+              .th-content {
+                padding-left: 3%;
+              }
+              .td-content {
+                padding-left: 3%;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
 
