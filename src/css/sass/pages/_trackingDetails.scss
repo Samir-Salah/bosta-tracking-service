@@ -16,7 +16,7 @@
         .list-group.list-group-horizontal {
           .list-group-item {
             &.list-group-header {
-              color: rgb(163, 163, 163);
+              color: $secondry-color;
               font : {
                 size: 16px;
                 family: "Cairo";
@@ -25,17 +25,17 @@
             }
 
             &.red {
-              color: red;
+              color: $red-color;
             }
 
             &.yellow {
-              color: #f9ba02;
+              color: $yellow-color;
             }
 
             &.green {
-              color: #36b600;
+              color: $green-color;
             }
-            color: rgb(17, 27, 55);
+            color: $primary-color;
             background: transparent;
             font : {
               size: 16px;
@@ -56,41 +56,51 @@
           -moz-columns: 2;
           columns: 2;
           li {
-            color: rgb(17, 27, 55);
+            color: $primary-color;
             width: 125%;
             margin-top: -10px;
             background: transparent;
             font : {
-              size: 16px;
+              size: 14px;
               family: "Cairo-Bold";
             }
           }
           .first-step {
+            width: 20%;
           }
           .second-step {
+            width: 26%;
+            padding-left: 5%;
           }
           .third-step {
-            
+            width: 40%;
+            padding-left: 8%;
           }
           .fourth-step {
-            
+            width: 17%;
+            .colored {
+              color: $primary-color;
+            }
+            .not-colored {
+              color: #d3d3d3;
+            }
           }
         }
         .steps-bar {
           width: 95%;
           margin: 2%;
           .accomplished.green {
-            background-color: #36b600;
+            background-color: $green-color;
           }
           .accomplished.red {
-            background-color: #f40105;
+            background-color: $red-color
           }
           .accomplished.yellow {
-            background-color: #f8b902;
-            &.big-icon {
-              width: 40px;
-              height: 40px;
-            }
+            background-color: $yellow-color;
+          }
+          &.big-icon {
+            width: 40px;
+            height: 40px;
           }
         }
         ul {
@@ -118,7 +128,7 @@
   .tracking-events {
     .list-group {
       .list-group-item {
-        color: #121c38;
+        color: $primary-color;
         font : {
           size: 20px;
         }
@@ -136,7 +146,7 @@
       ul {
         .tracking-details-header {
           width: 18%;
-          color: #99a4b9;
+          color: $secondry-color;
           background: transparent;
         }
       }
@@ -147,7 +157,7 @@
         .tracking-details-item {
           width: 18%;
           background: transparent;
-          color: #585e72;
+          color: $secondry-color;
         }
       }
     }
@@ -155,22 +165,69 @@
     .tracking-address-table {
     }
   }
-}
 
-.table {
-  width: 55%;
-  .thead {
-    .tr {
-      .th {
-        font-size: 30px;
+  //Shipment Details area
+  .Shipment_Details {
+    
+    margin-top: 25px;
 
-        background: red;
+    .details_head {
+      .head_left {
+        font-size: 20px;
+        color: $primary-color;
+        float: left;
+        width: 50%;
+        font-weight: 700;
+      }
+    }
+    .clear {
+      clear: both;
+    }
+    .details_head_table {
+      margin-top: 20px;
+      table {
+        width: 65%;
+        margin: 0 0 15px 0;
+        @include border(1px solid #EEEEEE , none);
+        @include prefixer( border-radius , 20px, webkit moz o);
+        font-size: 14px;
+        text-align: left;
+        border-spacing: 0;
+        border-collapse: collapse;
+        tbody {
+          display: table-row-group;
+          vertical-align: middle;
+          border-color: inherit;
+          
+          .table-row {
+            @include border(1px solid #EEEEEE , none);
+            display: table-row;
+            vertical-align: inherit;
+            height: 50px;
+            color:  $secondry-color;
+            
+            
+            &.table-header-first {
+              background-color: #fafafa;
+            }
+            .th-content {
+            
+              padding-left: 4%;
+              color: #9BA5BB;
+              
+          
+            }  
+            .td-content {
+            
+                padding-left: 4%;
+                color:  $table-items-color;
+
+              
+            }
+          }
+        }
       }
     }
   }
 }
 
-.big {
-  width: 40px;
-  height: 40px;
-}

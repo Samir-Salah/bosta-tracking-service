@@ -3,6 +3,10 @@ import axios from "axios";
 import "react-step-progress-bar/styles.css";
 import { ProgressBar, Step } from "react-step-progress-bar";
 import { Icon } from "rsuite";
+import moment from "moment";
+import i18n  from "i18next";
+import cookies from "js-cookie";
+import i18next from "i18next";
 
 const apiUrl = "https://tracking.bosta.co/shipments/track/";
 async function getTrack(trackingNumber) {
@@ -15,6 +19,17 @@ async function getTrack(trackingNumber) {
 }
 
 class TrackingDetails extends Component {
+  languages = [
+    {
+      code: "ar",
+      name: "العربية",
+      dir: "rtl",
+    },
+    {
+      code: "en",
+      name: "English",
+    },
+  ];
   daysOfWeek = [
     "Sunday",
     "Monday",
@@ -25,7 +40,13 @@ class TrackingDetails extends Component {
     "Saturday",
   ];
   state = {
-    transitEvents: [],
+    transitEvents: [
+      {
+        state: "",
+        timestamp: "",
+        hub: "",
+      },
+    ],
     trackingNo: "",
     currentStatus: {
       state: "",
@@ -37,24 +58,36 @@ class TrackingDetails extends Component {
     theNameOfTheDay: "",
     branch: "",
   };
+
   trackingNumber = "9442984"; //6636234, 7234258, 9442984,1094442
   componentDidMount = () => {
     getTrack(this.trackingNumber).then((response) => {
       this.setState({
         trackingNo: response.data.TrackingNumber,
         currentStatus: response.data.CurrentStatus,
-        promisedDate: response.data.PromisedDate.split("T"),
         newDate: response.data.CurrentStatus.timestamp
           .replace(/-/g, "/")
           .split("T"),
         transitEvents: response.data.TransitEvents,
       });
+      if (response.data.PromisedDate) {
+        this.setState({
+          promisedDate: response.data.PromisedDate.split("T"),
+        });
+      }
       const day = new Date(this.state.newDate[0]);
       this.setState({
         theNameOfTheDay: this.daysOfWeek[day.getDay()],
         branch: this.state.transitEvents[1].hub,
       });
     });
+
+    // const currentLanguageCode = cookies.get('i18next') || 'en';
+    // const currentLanguage = this.languages.find(l => l.code === currentLanguageCode);
+    // useEffect(() => {
+      // document.body.dir= currentLanguage.dir || 'ltr'
+
+    // }, [currentLanguage])
   };
 
   // function to check the state of shipement
@@ -126,6 +159,8 @@ class TrackingDetails extends Component {
       return <Icon icon="truck" size="2x"></Icon>;
     } else if (this.state.currentStatus.state === "DELIVERED") {
       return <Icon icon="check"></Icon>;
+    } else {
+      return <Icon icon="truck" size="2x"></Icon>;
     }
   }
 
@@ -134,21 +169,15 @@ class TrackingDetails extends Component {
     switch (this.state.currentStatus.state) {
       case "DELIVERED":
         return null;
-        
 
       case "TICKET_CREATED":
         return null;
-        
 
       case "PACKAGE_RECEIVED":
         return null;
-        
-    
-        
 
       default:
         return this.state.currentStatus.state;
-        
     }
   }
 
@@ -157,20 +186,24 @@ class TrackingDetails extends Component {
     switch (this.state.currentStatus.state) {
       case "DELIVERED":
         return null;
-        
 
       case "TICKET_CREATED":
         return null;
-        
 
       case "PACKAGE_RECEIVED":
         return null;
-        
-        
 
       default:
         return "red";
-        
+    }
+  }
+
+  //set class to "Shipment delivered" of the progress bar
+  setClasstoShipmentDeliveredInTheProgressBar() {
+    if (this.state.currentStatus.state === "DELIVERED") {
+      return "colored";
+    } else {
+      return "not-colored";
     }
   }
 
@@ -179,33 +212,55 @@ class TrackingDetails extends Component {
       <React.Fragment>
         <div className="container mt-5">
           <div className="current-status">
+            <div>test</div>
+            {this.languages.map(({ code, name }) => (
+                <button
+                key={code}
+                  className="btn btn-outline-primary"
+                  onClick={() => i18next.changeLanguage(code)}
+                >
+                  {name}
+                </button>
+            ))}
             <ul className="list-group">
               <li className="list-group-item first-row">
                 <ul className="list-group list-group-horizontal">
                   <li className="list-group-item border-0 list-group-header">
-                    Tracking Number {this.state.trackingNo}
+                    {i18n.t("Tracking Number")} {this.state.trackingNo}
                   </li>
                   <li className="list-group-item border-0 list-group-header">
-                    Last update
+                    {i18n.t("Latest Update")}
                   </li>
                   <li className="list-group-item border-0 list-group-header">
-                    Merchent Name
+                    {i18n.t("Merchent Name")}
                   </li>
                   <li className="list-group-item border-0 list-group-header">
-                    PromisedDate
+                    {i18n.t("Promised Date")}
                   </li>
                 </ul>
                 <ul className="list-group list-group-horizontal">
                   <li className={this.checkState()}>
-                    {this.state.currentStatus.state}
+                    {i18n.t(this.state.currentStatus.state)}
                   </li>
                   <li className="list-group-item border-0 show-date">
-                    {this.state.theNameOfTheDay + " " + this.state.newDate[0]}{" "}
-                    at {this.state.newDate[1]}
+                    {i18n.t(this.state.theNameOfTheDay) +
+                      " " +
+                      this.state.newDate[0]}
+                    {<br />}
+                    at{" "}
+                    {moment(new Date(this.state.newDate).getTime()).format(
+                      "LT"
+                    )}
                   </li>
-                  <li className="list-group-item border-0">test</li>
                   <li className="list-group-item border-0">
-                    {this.state.promisedDate[0]}
+                    {/* Merchent Name */}
+                  </li>
+                  <li className="list-group-item border-0">
+                    {i18n.t(
+                      moment(
+                        new Date(this.state.promisedDate).getTime()
+                      ).format("LL")
+                    )}
                   </li>
                 </ul>
               </li>
@@ -251,7 +306,6 @@ class TrackingDetails extends Component {
                               : this.setIconBig()
                           }`}
                         >
-                          {/* <Icon icon="truck" size="2x"></Icon> */}
                           {this.changeIconForUndelivered()}
                         </div>
                       )}
@@ -276,110 +330,71 @@ class TrackingDetails extends Component {
 
                 <ul className="list-group list-group-horizontal steps-details">
                   <li className="list-group-item border-0 first-step">
-                    Shipment created
+                    {i18n.t("Shipment created")}
                   </li>
                   <li className="list-group-item border-0 ms-5 second-step">
-                    The shipment has been <br />
-                    received from the merchant
+                    {i18n.t("The shipment has been received from the merchant")}
                   </li>
                   <li className="list-group-item border-0 ms-5 third-step">
-                    The shipment is out for delivery
+                    {i18n.t("The shipment is out for delivery")}
                     <br />
-                    <span className={this.setClassToCurrentState()}>{this.getCurrentState()}</span>
+                    <span className={this.setClassToCurrentState()}>
+                      {i18n.t(this.getCurrentState())}
+                    </span>
                   </li>
                   <li className="list-group-item border-0 ms-5 fourth-step">
-                    Shipment delivered
+                    <span
+                      className={this.setClasstoShipmentDeliveredInTheProgressBar()}
+                    >
+                      {i18n.t("Shipment delivered")}
+                    </span>
                   </li>
                 </ul>
               </li>
             </ul>
           </div>
 
-          <div className="mt-5 tracking-events">
-            <ul className="list-group list-group-horizontal">
-              <li className="list-group-item border-0 tracking-details-area">
-                Tracking Details
-              </li>
-              <li className="list-group-item border-0 receiving-address-area">
-                Receiving Address
-              </li>
-            </ul>
-            <table class="table border-ligth table-bordered rounded-3">
-              <thead className="table-light">
-                <tr>
-                  <th scope="col">Branch</th>
-                  <th scope="col">Date</th>
-                  <th scope="col">Time</th>
-                  <th scope="col">Details</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Mark</td>
-                  <td>Otto</td>
-                  <td>@mdo</td>
-                  <td>@mdo</td>
-                </tr>
-              </tbody>
-            </table>
-            {/* <ul className="list-group">
-                <ul className="list-group list-group-horizontal tracking-details-head">
-                <li className="list-group-item tracking-details-table">
-                  <li className="list-group-item border-0 tracking-details-header">
-                    Branch
-                  </li>
-                  <li className="list-group-item border-0 tracking-details-header">
-                    Date
-                  </li>
-                  <li className="list-group-item border-0 tracking-details-header">
-                    Time
-                  </li>
-                  <li className="list-group-item border-0 tracking-details-header">
-                    Details
-                  </li>
-                </ul>
-              </li>
-              <li className="list-group-item tracking-details-items">
-                <ul className="list-group list-group-horizontal">
-                  <li className="list-group-item border-0 tracking-details-header">
-                    Branch
-                  </li>
-                  <li className="list-group-item border-0 tracking-details-header">
-                    Date
-                  </li>
-                  <li className="list-group-item border-0 tracking-details-header">
-                    Time
-                  </li>
-                  <li className="list-group-item border-0 tracking-details-header">
-                    Details
-                  </li>
-                </ul>
-              </li>
-              <li className="list-group-item tracking-details-items">
-                <ul className="list-group list-group-horizontal">
-                  <li className="list-group-item border-0 tracking-details-header">
-                    Branch
-                  </li>
-                  <li className="list-group-item border-0 tracking-details-header">
-                    Date
-                  </li>
-                  <li className="list-group-item border-0 tracking-details-header">
-                    Time
-                  </li>
-                  <li className="list-group-item border-0 tracking-details-header">
-                    Details
-                  </li>
-                </ul>
-              </li>
-            </ul> */}
+          <div className="Shipment_Details">
+            <div className="details_head">
+              <div className="head_left">{i18n.t("Tracking Details")}</div>
+            </div>
 
-            {/* <ul>
-              <li className="list-group-item tracking-address-table">
-                <ul className="list-group list-group-horizontal">
-                  <li className="list-group-item border-0">Branch</li>
-                </ul>
-              </li>
-            </ul> */}
+            <div className="clear"></div>
+            <div className="details_head_table">
+              <table>
+                <tbody>
+                  <tr className="table-row table-header-first">
+                    <th className="th-content">{i18n.t("Branch")}</th>
+                    <th className="th-content">{i18n.t("Date")}</th>
+                    <th className="th-content">{i18n.t("Time")}</th>
+                    <th className="th-content">{i18n.t("Details")}</th>
+                  </tr>
+                  {this.state.transitEvents.map((transitEvent) => {
+                    return (
+                      <tr className="table-row">
+                        <td className="td-content">
+                          {transitEvent.hub ? transitEvent.hub : ""}
+                        </td>
+                        <td className="td-content">
+                          {moment(
+                            new Date(transitEvent.timestamp).getTime()
+                          ).format("L")}
+                        </td>
+                        <td className="td-content">
+                          {moment(
+                            new Date(transitEvent.timestamp).getTime()
+                          ).format("LT")}
+                        </td>
+                        <td className="td-content">
+                          {i18n.t(transitEvent.state).charAt(0).toUpperCase() +
+                            i18n.t(transitEvent.state).slice(1).toLowerCase()}
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </React.Fragment>
