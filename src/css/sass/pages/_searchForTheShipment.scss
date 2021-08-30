@@ -1,0 +1,66 @@
+.container {
+  .card {
+    @include position(absolute, 40%, 50%, none, none);
+    transform: translate(-50%, -50%);
+    .card-body {
+      max-width: 600px;
+      width: 100%;
+      margin: 0 auto;
+      box-shadow: 0px 4px 8px #dedede;
+      border-radius: 10px;
+      -webkit-border-radius: 10px;
+      -moz-border-radius: 24px;
+      padding: 25px 18px;
+      @include mobile-s{
+          width: 300px;
+      }
+      @include mobile{
+          width: 450px;
+      }
+
+      .card-title {
+        font: {
+          size: 18px;
+        }
+      }
+      .card-text {
+        font: {
+          size: 20px;
+          family: "Cairo-bold";
+        }
+        color: #000;
+      }
+      input{
+        font-size: 16px;
+        border: 1px solid #e3e7ec;
+        height: 36px;
+        border-radius: 5px;
+        -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+        padding: 5px 10px;
+        width: 240px;
+        color: #979797;
+        float: left;
+        @include mobile-s{
+            width: 78%;
+            
+        }
+        @include mobile{
+            width: 58%;
+        }
+      }
+      svg{
+        height: 34px;
+        width: 34px;
+        background: $red-color;
+        border: none;
+        border-radius: 50px;
+        -webkit-border-radius: 50px;
+        -moz-border-radius: 50px;
+        color: #fff;
+        font-size: 14px;
+        margin-left: 10px;
+      }
+    }
+  }
+}
