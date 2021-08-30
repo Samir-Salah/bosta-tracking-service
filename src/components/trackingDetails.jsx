@@ -4,7 +4,7 @@ import "react-step-progress-bar/styles.css";
 import { ProgressBar, Step } from "react-step-progress-bar";
 import { Icon } from "rsuite";
 import moment from "moment";
-import i18n  from "i18next";
+import i18n from "i18next";
 import cookies from "js-cookie";
 import i18next from "i18next";
 
@@ -85,7 +85,7 @@ class TrackingDetails extends Component {
     // const currentLanguageCode = cookies.get('i18next') || 'en';
     // const currentLanguage = this.languages.find(l => l.code === currentLanguageCode);
     // useEffect(() => {
-      // document.body.dir= currentLanguage.dir || 'ltr'
+    // document.body.dir= currentLanguage.dir || 'ltr'
 
     // }, [currentLanguage])
   };
@@ -214,13 +214,13 @@ class TrackingDetails extends Component {
           <div className="current-status">
             <div>test</div>
             {this.languages.map(({ code, name }) => (
-                <button
+              <button
                 key={code}
-                  className="btn btn-outline-primary"
-                  onClick={() => i18next.changeLanguage(code)}
-                >
-                  {name}
-                </button>
+                className="btn btn-outline-primary"
+                onClick={() => i18next.changeLanguage(code)}
+              >
+                {name}
+              </button>
             ))}
             <ul className="list-group">
               <li className="list-group-item first-row">
