@@ -1,8 +1,8 @@
 @mixin mobile-s {
-    @media only screen and (max-width: 480px) {
-      @content;
-    }
+  @media only screen and (max-width: 480px) {
+    @content;
   }
+}
 @mixin mobile {
   @media only screen and (min-width: 481px) and (max-width: 767px) {
     @content;
@@ -19,7 +19,12 @@
   }
 }
 @mixin windows {
-  @media only screen and (min-width: 1200px) {
+  @media only screen and (min-width: 1200px) and (max-width: 1399px) {
+    @content;
+  }
+}
+@mixin windows4k {
+  @media only screen and (min-width: 1400px) {
     @content;
   }
 }
@@ -30,25 +35,25 @@
   width: 100%;
   height: 100%;
 }
-@mixin commonProberty( $width , $height, $color) {
-    width: $width;
-    height: $height;
-    color: $color;
+@mixin commonProberty($width, $height, $color) {
+  width: $width;
+  height: $height;
+  color: $color;
 }
-@mixin border($border , $border-radius) {
-    border: $border;
-    border-radius: $border-radius;
+@mixin border($border, $border-radius) {
+  border: $border;
+  border-radius: $border-radius;
 }
-@mixin border-bottom($border , $border-radius) {
-    border-bottom: $border;
-    border-radius: $border-radius;
+@mixin border-bottom($border, $border-radius) {
+  border-bottom: $border;
+  border-radius: $border-radius;
 }
-@mixin position($position , $top , $left , $bottom , $right) {
-    position: $position;
-    top: $top;
-    left: $left;
-    bottom: $bottom;
-    right: $right;
+@mixin position($position, $top, $left, $bottom, $right) {
+  position: $position;
+  top: $top;
+  left: $left;
+  bottom: $bottom;
+  right: $right;
 }
 @mixin prefixer($proberty, $value, $prefixes: ()) {
   @each $prefixe in $prefixes {
@@ -69,21 +74,21 @@
   }
 }
 @mixin outlineBtn($outline) {
-    &:active,
-    &:focus {
-        outline: $outline;
-    }
+  &:active,
+  &:focus {
+    outline: $outline;
+  }
 }
-@mixin hover($background-color , $border) {
-    &:hover{
-        background-color: $background-color;
-        border: $border;
-    }
+@mixin hover($background-color, $border) {
+  &:hover {
+    background-color: $background-color;
+    border: $border;
+  }
 }
-@mixin header-hover( $display , $width, $height , $background , $transition) {
-        display: $display;
-        width: $width;
-        height: $height;
-        background:$background;
-        transition: $transition;
+@mixin header-hover($display, $width, $height, $background, $transition) {
+  display: $display;
+  width: $width;
+  height: $height;
+  background: $background;
+  transition: $transition;
 }

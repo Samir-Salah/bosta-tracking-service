@@ -258,6 +258,7 @@ class TrackingDetails extends Component {
                 </li>
                 <li className="list-group-item border-0">
                   {/* Merchent Name */}
+                  The Merchent Name
                 </li>
                 <li className="list-group-item border-0">
                   {moment(new Date(this.state.promisedDate).getTime()).format(
@@ -404,6 +405,19 @@ class TrackingDetails extends Component {
                     </tr>
                   );
                 })}
+              </tbody>
+            </table>
+          </div>
+
+          <div className="details_head">
+            <div className="head_right">Delivery address</div>
+          </div>
+
+          <div className="clear"></div>
+          <div className="address-area">
+            <table>
+              <tbody>
+                <tr>The adrress will be here</tr>
               </tbody>
             </table>
           </div>
