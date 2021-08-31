@@ -1,0 +1,26 @@
+{
+  "files": {
+    "main.css": "/bosta-tracking-service/static/css/main.544fe6ce.chunk.css",
+    "main.js": "/bosta-tracking-service/static/js/main.3d2fb9a6.chunk.js",
+    "main.js.map": "/bosta-tracking-service/static/js/main.3d2fb9a6.chunk.js.map",
+    "runtime-main.js": "/bosta-tracking-service/static/js/runtime-main.da40b156.js",
+    "runtime-main.js.map": "/bosta-tracking-service/static/js/runtime-main.da40b156.js.map",
+    "static/css/2.8f1ae764.chunk.css": "/bosta-tracking-service/static/css/2.8f1ae764.chunk.css",
+    "static/js/2.0ce2825b.chunk.js": "/bosta-tracking-service/static/js/2.0ce2825b.chunk.js",
+    "static/js/2.0ce2825b.chunk.js.map": "/bosta-tracking-service/static/js/2.0ce2825b.chunk.js.map",
+    "static/js/3.1aa56b81.chunk.js": "/bosta-tracking-service/static/js/3.1aa56b81.chunk.js",
+    "static/js/3.1aa56b81.chunk.js.map": "/bosta-tracking-service/static/js/3.1aa56b81.chunk.js.map",
+    "index.html": "/bosta-tracking-service/index.html",
+    "static/css/2.8f1ae764.chunk.css.map": "/bosta-tracking-service/static/css/2.8f1ae764.chunk.css.map",
+    "static/css/main.544fe6ce.chunk.css.map": "/bosta-tracking-service/static/css/main.544fe6ce.chunk.css.map",
+    "static/js/2.0ce2825b.chunk.js.LICENSE.txt": "/bosta-tracking-service/static/js/2.0ce2825b.chunk.js.LICENSE.txt",
+    "static/media/main.css": "/bosta-tracking-service/static/media/Cairo-SemiBold.0d18a3d1.ttf"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.da40b156.js",
+    "static/css/2.8f1ae764.chunk.css",
+    "static/js/2.0ce2825b.chunk.js",
+    "static/css/main.544fe6ce.chunk.css",
+    "static/js/main.3d2fb9a6.chunk.js"
+  ]
+}
