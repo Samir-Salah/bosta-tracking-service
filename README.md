@@ -3,9 +3,14 @@
 
 ## Table of Contents
 * [Project Title](#bosta-tracking-service-project)
+* [Live Demo](#live-demo)
 * [Instructions](#instructions)
 * [To Get Start](#to-get-start)
-* [Live Demo](#live-demo)
+
+
+## Live Demo
+
+https://samir-salah.github.io/bosta-tracking-service
 
 ## Instructions
 
@@ -81,7 +86,3 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
 
-
-## Live Demo
-
-https://samir-salah.github.io/bosta-tracking-service
